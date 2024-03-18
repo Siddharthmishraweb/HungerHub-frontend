@@ -191,10 +191,11 @@ export const Home = () => {
                 style={{
                   backgroundColor: "#E2293F",
                   color: "white",
-                  borderRadius: "22px",
                   fontFamily: "Poppins",
                   fontWeight: "bolder",
                   boxShadow: "0px 2px 5px 0px rgba(226,41,63,1)",
+                  padding: "12px 23px",
+                  borderRadius: "19px"
                 }}
               >
                 Order Now
