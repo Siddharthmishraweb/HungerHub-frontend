@@ -116,24 +116,101 @@ import { Grid, Typography, Button } from "@mui/material";
 import Paneer from "../../assets/images/Paneer.png";
 import { MultiItemCarousel } from "./MultiItemCarousel";
 
+const sectionStyle = {
+  padding: '2.5rem',
+  '@media (min-width: 768px)': {
+    padding: '2.5rem 5rem',
+  }
+};
+
+const paragraphStyle = {
+  fontSize: '1.25rem',
+  fontWeight: '600',
+  color: '#9CA3AF',
+  paddingTop: '0.75rem',
+  paddingBottom: '2.5rem',
+  fontFamily: "Poppins"
+};
+
 export const Home = () => {
   return (
-    <Grid container justifyContent="space-between" spacing={2} style={{ paddingLeft: "2rem", marginTop: "3rem" }}>
-      <Grid item xs={12} md={6}>
+    <Grid
+      container
+      justifyContent="space-between"
+      spacing={2}
+      style={{ paddingLeft: "2rem", marginTop: "3rem" }}
+    >
+      <Grid item xs={12} md={6} >
         <div className="text-center">
-          <Typography variant="body1" style={{ color: "#C2C2C2" }}>🤤 EASY WAY TO ORDER YOUR FOOD</Typography>
-          <Typography variant="h1" style={{ marginTop: "2rem", fontWeight: "bolder", fontFamily: "Poppins" }}>Order Tasty &</Typography>
-          <Typography variant="h1" style={{ marginTop: "0rem", fontWeight: "bolder", fontFamily: "Poppins" }}>Fresh Food</Typography>
-          <Typography variant="h1" style={{ marginTop: "0rem", fontWeight: "bolder", fontFamily: "Poppins", color: "#E0001E" }}>anytime!</Typography>
-          <Typography variant="body1" style={{ color: "#C2C2C2" }}>Just Confirm your order and enjoy our delicious fastest delivery.</Typography>
-          <Grid container justifyContent="space-between" alignItems="center" style={{ marginTop: "2rem", width: "22vw" }}>
+          <Typography variant="body1" style={{ color: "#C2C2C2" }}>
+            🤤 EASY WAY TO ORDER YOUR FOOD
+          </Typography>
+          <Typography
+            variant="h1"
+            style={{
+              marginTop: "2rem",
+              fontWeight: "bolder",
+              fontFamily: "Poppins",
+            }}
+          >
+            Order Tasty &
+          </Typography>
+          <Typography
+            variant="h1"
+            style={{
+              marginTop: "0rem",
+              fontWeight: "bolder",
+              fontFamily: "Poppins",
+            }}
+          >
+            Fresh Food
+          </Typography>
+          <Typography
+            variant="h1"
+            style={{
+              marginTop: "0rem",
+              fontWeight: "bolder",
+              fontFamily: "Poppins",
+              color: "#E0001E",
+            }}
+          >
+            anytime!
+          </Typography>
+          <Typography variant="body1" style={{ color: "#C2C2C2" }}>
+            Just Confirm your order and enjoy our delicious fastest delivery.
+          </Typography>
+          <Grid
+            container
+            justifyContent="space-between"
+            alignItems="center"
+            style={{ marginTop: "2rem", width: "22vw" }}
+          >
             <Grid item>
-              <Button variant="contained" style={{ backgroundColor: "#E2293F", color: "white", borderRadius: "22px", fontFamily: "Poppins", fontWeight: "bolder", boxShadow: "0px 2px 5px 0px rgba(226,41,63,1)" }}>
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "#E2293F",
+                  color: "white",
+                  borderRadius: "22px",
+                  fontFamily: "Poppins",
+                  fontWeight: "bolder",
+                  boxShadow: "0px 2px 5px 0px rgba(226,41,63,1)",
+                }}
+              >
                 Order Now
               </Button>
             </Grid>
             <Grid item>
-              <Typography variant="body1" style={{ color: "#FAB804", textDecoration: "underline", cursor: "pointer" }}>See Menu</Typography>
+              <Typography
+                variant="body1"
+                style={{
+                  color: "#FAB804",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                }}
+              >
+                See Menu
+              </Typography>
             </Grid>
           </Grid>
         </div>
@@ -142,7 +219,15 @@ export const Home = () => {
         <img src={Paneer} alt="Paneer" style={{ width: "100%" }} />
       </Grid>
       <Grid>
-         <MultiItemCarousel />
+        {/* <section className="p-10 lg:py-10 lg:px-20">
+          <p className="text-2xl font-semibold text-gray-400 py-3 pb-10"></p>
+          <MultiItemCarousel />
+        </section> */}
+
+        <section style={sectionStyle}>
+          <p style={paragraphStyle}>Top Meals</p>
+          <MultiItemCarousel />
+        </section>
       </Grid>
     </Grid>
   );

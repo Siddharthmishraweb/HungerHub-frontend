@@ -47,3 +47,7 @@
   font-weight: 300;
   font-style: normal;
 }
+
+.slick-list{
+  width: 90vw !important;
+}
