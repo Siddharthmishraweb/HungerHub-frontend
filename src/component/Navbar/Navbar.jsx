@@ -359,6 +359,8 @@ export const Navbar = () => {
       </style>
       <div
         style={{
+          position:"sticky",
+          zIndex:22,
           fontFamily: "Poppins",
           display: "flex",
           alignItems: "center",

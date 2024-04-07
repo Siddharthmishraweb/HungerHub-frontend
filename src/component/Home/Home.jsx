@@ -115,10 +115,13 @@ import React from "react";
 import { Grid, Typography, Button } from "@mui/material";
 import Paneer from "../../assets/images/Paneer.png";
 import { MultiItemCarousel } from "./MultiItemCarousel";
+import { Restaurant } from '../Restaurant/Restaurant';
+
+const restautant = [1, 1, 1, 1, 1, 1, 1, 1];
 
 const sectionStyle = {
   padding: '2.5rem',
-  '@media (min-width: 768px)': {
+  '@media (minWidth: 768px)': {
     padding: '2.5rem 5rem',
   }
 };
@@ -141,7 +144,7 @@ export const Home = () => {
       style={{ paddingLeft: "2rem", marginTop: "3rem" }}
     >
       <Grid item xs={12} md={6} >
-        <div className="text-center">
+        <div>
           <Typography variant="body1" style={{ color: "#C2C2C2" }}>
             🤤 EASY WAY TO ORDER YOUR FOOD
           </Typography>
@@ -228,6 +231,18 @@ export const Home = () => {
         <section style={sectionStyle}>
           <p style={paragraphStyle}>Top Meals</p>
           <MultiItemCarousel />
+        </section>
+        <section className="m-5 pt-10">
+          <h1 className="text-2xl font-semibold text-gray-400 pb-8 " style={{fontFamily: "Poppins"}}>
+            Order From Our Handpicked Faviourate
+          </h1>
+
+          <div className="flex flex-wrap items-center justify-around gap-5">
+            {
+              restautant.map((item) => <Restaurant />)
+            }
+          </div>
+
         </section>
       </Grid>
     </Grid>

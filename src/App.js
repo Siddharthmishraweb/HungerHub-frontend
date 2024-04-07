@@ -7,6 +7,11 @@ import './App.css';
 import { Navbar } from './component/Navbar/Navbar';
 import { darkTheme } from './Theme/DarkTheme';
 import { Home } from './component/Home/Home';
+import { Restaurant } from './component/Restaurant/Restaurant';
+import RestaurantDetails from './component/Restaurant/RestaurantDetails';
+import Cart from './component/Cart/Cart';
+import Profile from './component/Profile/Profile';
+import { CustomerRouter } from './Routers/CustomerRouter';
 
 function App() {
   return (
@@ -15,7 +20,11 @@ function App() {
 
         <CssBaseline />
          <Navbar />
-         <Home />
+         {/* <Home /> */}
+         {/* <RestaurantDetails /> */}
+         {/* <Profile /> */}
+         <CustomerRouter />
+         
       </ThemeProvider>
   );
 }
