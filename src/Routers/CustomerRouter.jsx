@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Profile from "../component/Profile/Profile";
 import Cart from "../component/Cart/Cart";
 import RestaurantDetails from "../component/Restaurant/RestaurantDetails";
+import { Auth } from "../component/Auth/Auth";
 
 export const CustomerRouter = () => {
     return (
@@ -15,8 +16,8 @@ export const CustomerRouter = () => {
                 <Route path="/restaurant/:city/:title/:id" element={<RestaurantDetails/>} />
                 <Route path="/cart" element={<Cart/>} />
                 <Route path="/my-profile/*" element={<Profile/>} />
-
             </Routes>
+            <Auth />
         </div>
     );
 }
