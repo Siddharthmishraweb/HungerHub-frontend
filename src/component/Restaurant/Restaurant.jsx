@@ -8,17 +8,42 @@ import ShareIcon from "@mui/icons-material/Share";
 import { Label } from "@mui/icons-material";
 import { Chip } from "@mui/material";
 import { FavoriteBorder, Favorite } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorite } from "../State/Authentication/Action";
+import {isPresentInFavorites} from "../config/logic";
 
-export const Restaurant = () => {
+export const Restaurant = (props) => {
+  //console.log("props.data", props.data);
+  const restaurant = props?.data;
+  //console.log("restaurant.images[1]", restaurant.images[1]);
+  const navigate = useNavigate();
+  const disptach = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  const {auth} = useSelector(store=> store);
+  const handleNavigateToRestaurant=()=>{
+    if(restaurant.open){
+      //console.log("&&&&&&&&&&&   restaurant   &&&&&&&&&&&&&", restaurant)
+      navigate(`restaurant/${restaurant.address.city}/${restaurant.name}/${restaurant.id}`)
+    }
+  }
+
+
+  const handleAddToFavorite = (item) => {
+    disptach(addToFavorite({ jwt, restaurantId: item.id }));
+  }
+
+
+
   return (
-    <Card className=" w-[18rem]">
+    <Card className=" w-[18rem]" onClick={()=> handleNavigateToRestaurant()}>
       <div className={`${true ? 'cursor-pointer': "cursor-not-allowed"} relative`}>
-        <img src="http://res.cloudinary.com/dcpesbd8q/image/upload/v1707802815/ux3xq93xzfbqhtudigv2.jpg" alt="" />
+        <img src={restaurant.images[1]} alt="" />
         <Chip
           size="small"
           className="absolute top-2 left-2"
-          color={true?"success":"error"}
-          label={true?"open":"closed"}
+          color={restaurant?.open?"success":"error"}
+          label={restaurant?.open?"open":"closed"}
         >
 
         </Chip>
@@ -26,14 +51,14 @@ export const Restaurant = () => {
       </div>
       <div className="p-4 textPart lg:flex w-full justify-between">
         <div className="space-y-1">
-          <p className="font-semibold text-lg">Indian Fast Food</p>
+          <p className="font-semibold text-lg">{restaurant?.name}</p>
           <p className="text-gray-500 text-sm">
-            Craving it all? Dive into our global fla...
+            {restaurant?.description}
           </p>
         </div>
         <div>
-          <IconButton>
-            {true?<Favorite /> : <FavoriteBorder />}
+          <IconButton onClick={()=> handleAddToFavorite(restaurant)}>
+            {isPresentInFavorites(auth.favorites, restaurant) ?<Favorite /> : <FavoriteBorder />}
           </IconButton>
         </div>
       </div>

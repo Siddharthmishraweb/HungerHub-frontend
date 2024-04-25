@@ -1,21 +1,21 @@
 import { Card, Button } from "@mui/material";
 
-export const OrderCard = () => {
+export const OrderCard = ({item, order}) => {
   return (
     <Card className="flex justify-between items-center p-5">
       <div className="flex items-center space-x-5">
         <img
-          src="http://res.cloudinary.com/dcpesbd8q/image/upload/v1707904777/ufillbuz6lzjilw0rrc3.jpg"
+          src={item?.food?.images}
           alt=""
           className="h-16 w-16"
         />
         <div>
-            <p>Pizza</p>
-            <p>₹ 399</p>
+            <p>{item?.food?.name}</p>
+            <p>₹ {item?.totalPrice}</p>
         </div>
       </div>
       <div>
-        <Button className="cursor-not-allowed">Completed</Button>
+        <Button className="cursor-not-allowed">{order?.orderStatus}</Button>
       </div>
     </Card>
   );

@@ -13,6 +13,8 @@ import { AddressCard } from "./AddressCard";
 import { AddLocationAlt } from "@mui/icons-material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../State/Order/Action";
 
 const items = [1, 1];
 
@@ -40,8 +42,25 @@ const Cart = () => {
   const handleOpenAddressModal = () => setOpen(true);
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+  const dispatch =  useDispatch();
+  const { auth } = useSelector(state => state);
   const handleSubmit = (value) => {
     console.log(value);
+    const data = {
+      jwt: localStorage.getItem("jwt"),
+      order: {
+        restaurantId: cart.cartItems[0]?.food?.restaurant.id,
+        deliveryAddress: {
+          fullName: auth?.user?.fullName,
+          streetAddress: value?.streetAddress,
+          city: value?.city,
+          state: value?.state,
+          postalCode: value?.pincode,
+          country: value?.country || "india"
+        }
+      }
+    };
+    dispatch(createOrder(data));
   };
   const initialValues = {
     streetAddress: "",
@@ -50,12 +69,14 @@ const Cart = () => {
     city: "",
   };
 
+  const { cart } = useSelector(state => state);
+
   return (
     <div>
       <main className="lg:flex justify-between">
         <section className="lg:w-[30%] space-y-6 lg:min-h-screen pt-10">
-          {items.map(() => (
-            <CartItem />
+          {cart?.cartItems.map((item) => (
+            <CartItem item={item}/>
           ))}
           <Divider />
           <div className="billDetails px-5 text-sm">
@@ -63,21 +84,21 @@ const Cart = () => {
             <div className="space-y-3">
               <div className="flex justify-between text-gray-400">
                 <p>Item Total</p>
-                <p>₹ 21</p>
+                <p>₹ {cart?.cart?.total}</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>Delivery Fee</p>
-                <p>₹ 21</p>
+                <p>₹ 80</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>GST & Restaurant Charges</p>
-                <p>₹ 33</p>
+                <p>₹ 0</p>
               </div>
               <Divider />
             </div>
             <div className="flex justify-between text-gray-400">
               <p>Total Pay</p>
-              <p>₹ 330 </p>
+              <p>₹  {cart?.cart?.total + 80}</p>
             </div>
           </div>
         </section>

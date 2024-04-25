@@ -10,6 +10,8 @@ import {
 import React from "react";
 import { Drawer, Divider, useMediaQuery } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../State/Authentication/Action";
 
 const menu = [
   { title: "Orders", icon: <ShoppingBag /> },
@@ -23,8 +25,15 @@ const menu = [
 
 export const ProfileNavigation = ({ open, handleClose }) => {
   const isSmallScreen = useMediaQuery("min-width:900px");
+  const dispatch = useDispatch();
   const navigate =  useNavigate();
+  const { auth } = useSelector(store => store)
+  console.log("auth", auth);
   const handleNavigate = (item) => {
+    if(item.title === "Logout"){
+      dispatch(logout());
+      navigate("/");
+    }else
     navigate(`/my-profile/${item.title.toLowerCase()}`);
   }
 

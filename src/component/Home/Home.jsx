@@ -111,13 +111,17 @@
 // };
 
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Typography, Button } from "@mui/material";
 import Paneer from "../../assets/images/Paneer.png";
 import { MultiItemCarousel } from "./MultiItemCarousel";
 import { Restaurant } from '../Restaurant/Restaurant';
+import { useDispatch, useSelector } from "react-redux";
+import { getAllRestaurantsAction } from "../State/Restaurant/Action";
+import { useNavigate } from "react-router-dom";
+import { findCart } from "../State/Cart/Action";
 
-const restautant = [1, 1, 1, 1, 1, 1, 1, 1];
+// const restautant = [1, 1, 1, 1, 1, 1, 1, 1];
 
 const sectionStyle = {
   padding: '2.5rem',
@@ -136,6 +140,16 @@ const paragraphStyle = {
 };
 
 export const Home = () => {
+  const disptach = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  const {restaurant} = useSelector(store => store);
+  const navigate=useNavigate();
+
+  useEffect(()=>{
+    disptach(getAllRestaurantsAction(jwt));
+  }, [])
+
+
   return (
     <Grid
       container
@@ -239,7 +253,7 @@ export const Home = () => {
 
           <div className="flex flex-wrap items-center justify-around gap-5">
             {
-              restautant.map((item) => <Restaurant />)
+             restaurant?.restaurants?.map((item) => <Restaurant data={item}/>)
             }
           </div>
 
